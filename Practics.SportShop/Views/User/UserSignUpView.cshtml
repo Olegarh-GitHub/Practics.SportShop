@@ -1,0 +1,53 @@
+@using Practics.SportShop.Domain.Enums
+@model Practics.SportShop.Models.Inputs.SignUpInput
+
+@{
+    ViewBag.Title = "Регистрация в ООО \"СПОРТ\"";
+    Layout = "_Layout";
+}
+
+<h2>Регистрация в ООО \"СПОРТ\"</h2>
+
+@using (Html.BeginForm("SignUp", "User", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Username)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Username, new {htmlAttributes = new {@class = "form-control"}})
+            </td>
+        </tr>
+        <hr/>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Password)
+            </td>
+            <td>
+                @Html.PasswordFor(model => model.Password, new {@class = "form-control"})
+            </td>
+        </tr>
+        <hr/>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.FullName)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new {@class = "form-control"}})
+            </td>
+        </tr>
+        <hr/>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Role)
+            </td>
+            <td>
+                @Html.DropDownList("Role", 
+                    Html.GetEnumSelectList<UserRole>(),
+                    "Ваша роль в системе",new { @class = "form-control" })
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Регистрация" class="btn btn-dark"/>
+}

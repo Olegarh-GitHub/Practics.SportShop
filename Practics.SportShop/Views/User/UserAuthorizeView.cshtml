@@ -1,0 +1,54 @@
+@model Practics.SportShop.Models.Inputs.AuthorizeInput
+
+@{
+    ViewBag.Title = "Авторизация в ООО \"СПОРТ\"";
+    Layout = "_Layout";
+}
+
+<h2>Авторизация в ООО "СПОРТ"</h2>
+
+<div>
+    <div>
+        <h3>Добро пожаловать в магазин ООО "СПОРТ"! Мы продаем спортивный инвентарь по доступным ценам!</h3>
+    </div>
+    <div>
+        <h5>
+            <span>Необходимо пройти авторизацию в нашем интернет-магазине, либо </span>@Html.ActionLink("зарегистрироваться", "SignUp", "User", FormMethod.Get)
+        </h5>
+    </div>
+</div>
+
+@using (Html.BeginForm("Authorize", "User", FormMethod.Post))
+{
+    <div>
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Username)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Username, new {htmlAttributes = new {@class = "form-control"}})
+                </td>
+            </tr>
+            <tr>
+                    
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Password)
+                </td>
+                <td>
+                    @Html.PasswordFor(model => model.Password, new {@class = "form-control"})
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <input type="submit" value="Войти" class="btn btn-dark"/>
+    </div>
+}
+@using (Html.BeginForm("Index", "Product", FormMethod.Get))
+{
+    @Html.Hidden("isGuest", true)
+    <input type="submit" value="Войти как гость" class="btn btn-dark"/>
+}

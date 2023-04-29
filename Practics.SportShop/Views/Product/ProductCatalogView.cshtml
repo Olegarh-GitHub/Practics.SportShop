@@ -1,0 +1,58 @@
+@using Practics.SportShop.Models.Inputs
+@model List<Practics.SportShop.Domain.Models.Product>
+
+@{
+    ViewBag.Title = "Каталог";
+    Layout = "_Layout";
+
+    var products = Model;
+
+    var filter = ProductsDiscountFilterInput.All;
+}
+
+<h2>Это наш каталог! Выбирайте товары по душе</h2>
+
+@using (Html.BeginForm("Index", "Product", FormMethod.Post))
+{
+    @Html.DropDownList("input", 
+        Html.GetEnumSelectList<ProductsDiscountFilterInput>(),new { @class = "form-control" })
+
+    <input type="submit" value="Фильтр" class="btn btn-dark"/>
+}
+
+@if (products.Any())
+{
+    <table>
+        <tr>
+            <th>Наименование</th>
+            <th>Описание</th>
+            <th>Стоимость, руб.</th>
+            <th>Текущая скидка</th>
+            <th>Остаток на складе</th>
+        </tr>
+        @foreach (var product in products)
+        {
+            <tr>
+                <td>
+                    @product.Name
+                </td>
+                <td>
+                    @product.Description
+                </td>
+                <td>
+                    @product.Price
+                </td>
+                <td>
+                    @product.Discount
+                </td>
+                <td>
+                    @product.Stocks
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h4>Ничего не найдено...</h4>
+}
